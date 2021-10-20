@@ -75,9 +75,8 @@ function WebpackErrorHandling(error, stdout, stderr) {
 }
 
 // Tasks
-exports.cleanup = FileCleanup;
 exports.sass_only = CompileSass;
 exports.watch_sass = CompileSass_Watch;
 exports.watch_typescript = CompileTypescript_Watch;
-exports.development = series(CompileSass, CompileTypescript, WebpackDevelopment);
 exports.production = series(FileCleanup, CompileSass, CompileTypescript, WebpackProduction);
+exports.development = series(FileCleanup, CompileSass, CompileTypescript, WebpackDevelopment);
