@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "include": [
+    "src/TS/**/**.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "newLine": "crlf",
+    "declaration": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "emitDeclarationOnly": true,
+    "allowUnreachableCode": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "Enums/*": [ "src/TS/Enums/*" ],
+      "Models/*": [ "src/TS/Models/*" ],
+      "Services/*": [ "src/TS/Services/*" ],
+      "Structure/*": [ "src/TS/Structure/*" ]
+    }
+  }
+}
