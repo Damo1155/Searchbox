@@ -39,8 +39,10 @@ module.exports = (env) => {
             alias: {
                 "Enums": path.resolve(__dirname, "./src/TS/Enums/"),
                 "Models": path.resolve(__dirname, "./src/TS/Models/"),
+                "Shared": path.resolve(__dirname, "./src/TS/Shared/"),
                 "Services": path.resolve(__dirname, "./src/TS/Services/"),
                 "Structure": path.resolve(__dirname, "./src/TS/Structure/"),
+                "Listeners": path.resolve(__dirname, "./src/TS/Listeners/")
             }
         },
         optimization: {

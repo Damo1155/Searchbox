@@ -1,39 +1,55 @@
-// Structure
-import { ConfigureMarkup } from "Structure/Markup";
-import { ListboxSelectionClassPrefix, SpaceKeyCode, EnterKeyCode } from "Structure/Constants";
+// Services
+import { ConfigureMarkup } from "Services/MarkupService";
+import { GenerateIdentifier } from "Services/UniqueIdentifierService";
+
+// Listeners
+import { InitialiseExpanderListeners, DestroyExpanderListeners } from "Listeners/ExpandableContainerListeners";
+import { InitialiseSelectableOptionsListeners, DestroySelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
 
 export const initialise = (): void => {
-    const container = document.getElementsByClassName("searchbox");
+    const elements = document.getElementsByClassName("searchbox");
 
-    for (const item of container) {
-        const uuid = UniqueIdentifier();
+    // TODO :   On key down or up navigate the tree of 'options'
+    for (const element of elements) {
+        const uuid = GenerateIdentifier();
 
-        item.innerHTML = ConfigureMarkup(item, uuid);
+        element.innerHTML = ConfigureMarkup(element, uuid);
 
-        const listSelectionElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
-
-        // TODO :   Swap these to event based delegation
-        listSelectionElement
-            .addEventListener("click", () => {
-                ExpandableEvent(item, listSelectionElement);
-            });
-
-        listSelectionElement
-            .addEventListener("keydown", (event: KeyboardEvent) => {
-                if (event.code == SpaceKeyCode || event.code == EnterKeyCode) {
-                    ExpandableEvent(item, listSelectionElement);
-                }
-            });
+        InitialiseExpanderListeners(element, uuid);
+        InitialiseSelectableOptionsListeners(uuid);
     }
 }
 
-const ExpandableEvent = (container: Element, listSelectionElement: HTMLElement): void => {
-    const isExpanded = container.matches(".expanded");
+export const destroy = (identifier: string): void => {
+    const element = document.getElementById(identifier);
 
-    isExpanded ? container.classList.remove("expanded") : container.classList.add("expanded");
-    listSelectionElement.querySelector("div").setAttribute("aria-expanded", `${!isExpanded}`);
+    DestroyExpanderListeners(element);
+    DestroySelectableOptionsListeners(element);
+
+    element.remove();
 }
 
-const UniqueIdentifier = (): number => {
-    return parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(16).toString().replace(".", ""));
+export const destroyAll = (): void => {
+    const container = document.getElementsByClassName("searchbox");
+
+    for (const element of container) {
+        DestroyExpanderListeners(element);
+        DestroySelectableOptionsListeners(element);
+
+        element.remove();
+    }
+}
+
+export const createSearchBox = (identifier: string): void => {
+    const uuid = GenerateIdentifier(),
+        element = document.getElementById(identifier);
+
+    element.innerHTML = ConfigureMarkup(element, uuid);
+
+    InitialiseExpanderListeners(element, uuid);
+    InitialiseSelectableOptionsListeners(uuid);
+}
+
+export const updateSearchBoxOptions = (identifier: string): void => {
+
 }

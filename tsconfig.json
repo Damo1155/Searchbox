@@ -21,8 +21,10 @@
     "paths": {
       "Enums/*": [ "src/TS/Enums/*" ],
       "Models/*": [ "src/TS/Models/*" ],
+      "Shared/*": [ "src/TS/Shared/*" ],
       "Services/*": [ "src/TS/Services/*" ],
-      "Structure/*": [ "src/TS/Structure/*" ]
+      "Structure/*": [ "src/TS/Structure/*" ],
+      "Listeners/*": [ "src/TS/Listeners/*" ]
     }
   }
 }

@@ -50,24 +50,24 @@
         margin: 0 0; }
         .searchbox .container .results ul.result-groups li.group .group-name {
           margin: 0 0.675rem; }
-        .searchbox .container .results ul.result-groups li.group ul.options {
-          margin: 0;
-          padding: 0;
-          list-style: none; }
-          .searchbox .container .results ul.result-groups li.group ul.options li.option {
-            cursor: pointer;
-            padding: 0.625rem 0.625rem 0.625rem 1.25rem; }
-            .searchbox .container .results ul.result-groups li.group ul.options li.option:hover, .searchbox .container .results ul.result-groups li.group ul.options li.option:active, .searchbox .container .results ul.result-groups li.group ul.options li.option.selected {
-              font-weight: 500; }
-            .searchbox .container .results ul.result-groups li.group ul.options li.option:hover {
-              color: #262626;
-              background-color: #86b7fe; }
-            .searchbox .container .results ul.result-groups li.group ul.options li.option.selected {
-              color: #262626;
-              background-color: #86b7fe; }
-            .searchbox .container .results ul.result-groups li.group ul.options li.option:last-child:hover {
-              border-bottom-left-radius: 0.25rem;
-              border-bottom-right-radius: 0.25rem; }
+    .searchbox .container .results ul.options {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      .searchbox .container .results ul.options li.option {
+        cursor: pointer;
+        padding: 0.625rem 0.625rem 0.625rem 1.25rem; }
+        .searchbox .container .results ul.options li.option:hover, .searchbox .container .results ul.options li.option:active, .searchbox .container .results ul.options li.option.selected {
+          font-weight: 500; }
+        .searchbox .container .results ul.options li.option:hover {
+          color: #262626;
+          background-color: #86b7fe; }
+        .searchbox .container .results ul.options li.option.selected {
+          color: #262626;
+          background-color: #86b7fe; }
+        .searchbox .container .results ul.options li.option:last-child:hover {
+          border-bottom-left-radius: 0.25rem;
+          border-bottom-right-radius: 0.25rem; }
   .searchbox.expanded {
     z-index: 31; }
     .searchbox.expanded .sb-selection {
