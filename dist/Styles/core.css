@@ -59,7 +59,7 @@
         padding: 0.625rem 0.625rem 0.625rem 1.25rem; }
         .searchbox .container .results ul.options li.option:hover, .searchbox .container .results ul.options li.option:active, .searchbox .container .results ul.options li.option.selected {
           font-weight: 500; }
-        .searchbox .container .results ul.options li.option:hover {
+        .searchbox .container .results ul.options li.option:hover, .searchbox .container .results ul.options li.option:focus {
           color: #262626;
           background-color: #86b7fe; }
         .searchbox .container .results ul.options li.option.selected {

@@ -1,28 +1,43 @@
-// Constants
-import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, HiddenTextBoxPrefix, SelectionBoxPrefix } from "Shared/Constants";
+// Enums
+import { EventListenerTypes } from "Enums/EventListenerTypes";
 
-export const InitialiseSelectableOptionsListeners = (uuid: number): void => {
+// Listeners
+import { CollapseContainer } from "Listeners/ExpandableContainerListeners";
+
+// Constants
+import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, HiddenTextBoxPrefix, SelectionBoxPrefix, StandardEventListeners } from "Shared/Constants";
+
+export const InitialiseSelectableOptionsListeners = (parentElement: Element, uuid: number): void => {
     const resultsElement = document.getElementById(`${ResultsContainerPrefix}-${uuid}`);
     const optionsElements = resultsElement.querySelectorAll("ul.options li");
-    const hiddenInput = document.getElementById(`${HiddenTextBoxPrefix}-${uuid}`) as HTMLInputElement;
-    const selectionBox = document.getElementById(`${SelectionBoxPrefix}-${uuid}`);
+    const hiddenInput = document.getElementById(`${HiddenTextBoxPrefix}-${uuid}`) as HTMLInputElement; // TODO  :   May remove as now working with outermost parent element
+    const selectionBox = document.getElementById(`${SelectionBoxPrefix}-${uuid}`); // TODO  :   May remove as now working with outermost parent element
 
     optionsElements.forEach((element: Element) => {
-        ["click", "keydown", "focusout"].forEach((eventType: string) => {
+        StandardEventListeners.forEach((eventType: EventListenerTypes) => {
             element.addEventListener(eventType, (event) => {
                 const listenerConfiguration = {
-                    "click": () => {
+                    "click": (): void => {
+                        CollapseContainer(parentElement, uuid);
                         SetValueSelected(element, hiddenInput, selectionBox);
                     },
                     "keydown": () => {
                         const keyboardEvent = event as KeyboardEvent;
 
                         if (keyboardEvent.code == SpaceKeyCode || keyboardEvent.code == EnterKeyCode) {
+                            CollapseContainer(parentElement, uuid);
                             SetValueSelected(element, hiddenInput, selectionBox);
                         }
                     },
-                    "focusout": () => {
-                        // TODO :   Collapse the whole container and leave the selected value alone
+                    "focusout": (): void => {
+                        const focusEvent = event as FocusEvent,
+                            hasRelatedElement = parentElement.contains(<any>focusEvent.relatedTarget);
+
+                        // Purpose  :   If the click event is not related to the focused search box then close 
+                        //              the Searchbox.
+                        if (!hasRelatedElement) {
+                            CollapseContainer(parentElement, uuid);
+                        }
                     }
                 }
 
@@ -39,14 +54,12 @@ export const InitialiseSelectableOptionsListeners = (uuid: number): void => {
 }
 
 export const DestroySelectableOptionsListeners = (element: Element): void => {
-    ["click", "keydown", "focusout"].forEach((eventType: string) => {
+    StandardEventListeners.forEach((eventType: EventListenerTypes) => {
         //element.removeEventListener(eventType);
     });
 }
 
 const SetValueSelected = (element: Element, input: HTMLInputElement, selectionBox: HTMLElement): void => {
-    // TODO :   Close container after selection
-
     input.value = element.getAttribute("data-value");
     selectionBox.innerText = element.getAttribute("data-text");
 }

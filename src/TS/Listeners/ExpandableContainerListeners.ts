@@ -1,26 +1,36 @@
+// Enums
+import { EventListenerTypes } from "Enums/EventListenerTypes";
+
 // Constants
-import { ListboxSelectionClassPrefix, SpaceKeyCode, EnterKeyCode } from "Shared/Constants";
+import { ListboxSelectionClassPrefix, SpaceKeyCode, EnterKeyCode, StandardEventListeners } from "Shared/Constants";
 
 export const InitialiseExpanderListeners = (element: Element, uuid: number): void => {
     const listboxElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
 
-    ["click", "keydown", "focusout"].forEach((eventType: string) => {
-        listboxElement.addEventListener(eventType, (event) => {
+    StandardEventListeners.forEach((eventType: EventListenerTypes) => {
+        listboxElement.addEventListener(eventType, (event: MouseEvent | KeyboardEvent | FocusEvent) => {
             const listenerConfiguration = {
-                "click": () => {
+                "click": (): void => {
                     ExpandableEvent(element, listboxElement);
                 },
-                "keydown": () => {
+                "keydown": (): void => {
                     const keyboardEvent = event as KeyboardEvent;
 
                     if (keyboardEvent.code == SpaceKeyCode || keyboardEvent.code == EnterKeyCode) {
                         ExpandableEvent(element, listboxElement);
                     }
                 },
-                "focusout": () => {
-                    // TODO :   Collapse the container if the element focusing out of doesn't belong to the current Searchbox
+                "focusout": (): void => {
+                    const focusEvent = event as FocusEvent,
+                        hasRelatedElement = element.contains(<any>focusEvent.relatedTarget);
+
+                    // Purpose  :   If the click event is not related to the focused search box then close 
+                    //              the Searchbox.
+                    if (!hasRelatedElement) {
+                        ExpandableEvent(element, listboxElement);
+                    }
                 }
-            }
+            };
 
             const callback = listenerConfiguration[eventType] as Function;
 
@@ -34,9 +44,16 @@ export const InitialiseExpanderListeners = (element: Element, uuid: number): voi
 }
 
 export const DestroyExpanderListeners = (element: Element): void => {
-    ["click", "keydown", "focusout"].forEach((eventType: string) => {
+    StandardEventListeners.forEach((eventType: EventListenerTypes) => {
         //element.removeEventListener(eventType);
     });
+}
+
+export const CollapseContainer = (element: Element, uuid: number): void => {
+    element.classList.remove("expanded");
+
+    const listboxElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
+    listboxElement.querySelector("div").setAttribute("aria-expanded", `${false}`);
 }
 
 const ExpandableEvent = (element: Element, listboxElement: HTMLElement): void => {

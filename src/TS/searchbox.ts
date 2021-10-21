@@ -16,7 +16,7 @@ export const initialise = (): void => {
         element.innerHTML = ConfigureMarkup(element, uuid);
 
         InitialiseExpanderListeners(element, uuid);
-        InitialiseSelectableOptionsListeners(uuid);
+        InitialiseSelectableOptionsListeners(element, uuid);
     }
 }
 

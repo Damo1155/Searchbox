@@ -25,19 +25,19 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
                     <li class="group" role="group" aria-label="">
                         <strong class="group-name">Group Name</strong>
                         <ul class="options" role="none">
-                            <li class="option" aria-selected="false" role="option"
+                            <li class="option" aria-selected="false" role="option" tabindex="0"
                                 data-value="1" data-text="Option 1">
                                 Option 1
                             </li>
-                            <li class="option" aria-selected="false" role="option"
+                            <li class="option" aria-selected="false" role="option" tabindex="0"
                                 data-value="2" data-text="Option 2">
                                 Option 2
                             </li>
-                            <li class="option" aria-selected="false" role="option"
+                            <li class="option" aria-selected="false" role="option" tabindex="0"
                                 data-value="3" data-text="Option 3">
                                 Option 3
                             </li>
-                            <li class="option" aria-selected="false" role="option"
+                            <li class="option" aria-selected="false" role="option" tabindex="0"
                                 data-value="4" data-text="Option 4">
                                 Option 4
                             </li>
