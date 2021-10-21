@@ -1,10 +1,13 @@
 // Services
-import { ConfigureMarkup } from "Services/MarkupService";
 import { GenerateIdentifier } from "Services/UniqueIdentifierService";
+import { ConfigureMarkup, GenerateOptionsMarkup } from "Services/MarkupService";
 
 // Listeners
 import { InitialiseExpanderListeners, DestroyExpanderListeners } from "Listeners/ExpandableContainerListeners";
 import { InitialiseSelectableOptionsListeners, DestroySelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
+
+// Models
+import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
 
 export const initialise = (): void => {
     const elements = document.getElementsByClassName("searchbox");
@@ -16,13 +19,10 @@ export const initialise = (): void => {
         element.innerHTML = ConfigureMarkup(element, uuid);
 
         InitialiseExpanderListeners(element, uuid);
-        InitialiseSelectableOptionsListeners(element, uuid);
     }
 }
 
-export const destroy = (identifier: string): void => {
-    const element = document.getElementById(identifier);
-
+export const destroy = (element: HTMLElement): void => {
     DestroyExpanderListeners(element);
     DestroySelectableOptionsListeners(element);
 
@@ -40,16 +40,26 @@ export const destroyAll = (): void => {
     }
 }
 
-export const createSearchBox = (identifier: string): void => {
-    const uuid = GenerateIdentifier(),
-        element = document.getElementById(identifier);
+export const createContainer = (element: HTMLElement, options?: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
+    const uuid = GenerateIdentifier();
 
     element.innerHTML = ConfigureMarkup(element, uuid);
 
     InitialiseExpanderListeners(element, uuid);
-    InitialiseSelectableOptionsListeners(uuid);
+    InitialiseSelectableOptionsListeners(element, uuid);
 }
 
-export const updateSearchBoxOptions = (identifier: string): void => {
+export const updateOptions = (element: HTMLElement, options: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
+    const resultsContainer = element.querySelector("div.container div.results");
+
+    DestroySelectableOptionsListeners(element);
+
+    resultsContainer.innerHTML = GenerateOptionsMarkup(options);
+
+    const searchBoxUuid = element.querySelector("div").getAttribute("data-selectbox-id");
+    InitialiseSelectableOptionsListeners(element, parseInt(searchBoxUuid));
+}
+
+export const addAdditionalOptions = (element: HTMLElement, options: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
 
 }
