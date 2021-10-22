@@ -30,7 +30,7 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
     `;
 }
 
-export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups> | Array<SearchBoxOptions>): string => {
+export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>): string => {
     // TODO :   If a flat list of options then change up 'result-groups' architecture as it's currently dependent on child items being provided.
     // TODO :   If no options available on search then display an appropriate message
 

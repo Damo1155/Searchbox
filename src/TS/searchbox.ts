@@ -9,7 +9,9 @@ import { InitialiseSelectableOptionsListeners, DestroySelectableOptionsListeners
 
 // Models
 import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
-import { SessionStorageOptionsPrefix } from "./Shared/Constants";
+
+// Constants
+import { SessionStorageOptionsPrefix } from "Shared/Constants";
 
 export const initialise = (): void => {
     const elements = document.getElementsByClassName("searchbox");
@@ -49,7 +51,7 @@ export const destroyAll = (): void => {
     }
 }
 
-export const createContainer = (element: HTMLElement, options?: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
+export const createContainer = (element: HTMLElement, options?: Array<SearchBoxGroups | SearchBoxOptions>): void => {
     const uuid = GenerateIdentifier();
 
     element.innerHTML = ConfigureMarkup(element, uuid);
@@ -58,7 +60,7 @@ export const createContainer = (element: HTMLElement, options?: Array<SearchBoxG
     InitialiseSelectableOptionsListeners(element, uuid);
 }
 
-export const updateOptions = (element: HTMLElement, options: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
+export const updateOptions = (element: HTMLElement, options: Array<SearchBoxGroups | SearchBoxOptions>): void => {
     // TODO :   If current selected options is no longer available after the update then clear the sessionStorage object and reset the search box
 
     const resultsContainer = element.querySelector("div.container div.results"),
