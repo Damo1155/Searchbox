@@ -1,11 +1,14 @@
+// Constants
+import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, SelectionBoxPrefix, StandardEventListeners, SessionStorageValuePrefix } from "Shared/Constants";
+
 // Enums
 import { EventListenerTypes } from "Enums/EventListenerTypes";
 
+// Services
+import { SetValue } from "Services/SessionManagementService";
+
 // Listeners
 import { CollapseContainer } from "Listeners/ExpandableContainerListeners";
-
-// Constants
-import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, SelectionBoxPrefix, StandardEventListeners, SessionStorageValuePrefix } from "Shared/Constants";
 
 export const InitialiseSelectableOptionsListeners = (parentElement: Element, uuid: number): void => {
     const resultsElement = document.getElementById(`${ResultsContainerPrefix}-${uuid}`);
@@ -53,12 +56,10 @@ export const InitialiseSelectableOptionsListeners = (parentElement: Element, uui
 }
 
 export const DestroySelectableOptionsListeners = (element: Element): void => {
-    StandardEventListeners.forEach((eventType: EventListenerTypes) => {
-        //element.removeEventListener(eventType);
-    });
+    element.replaceWith(element.cloneNode(true));
 }
 
 const SetValueSelected = (element: Element, selectionBox: HTMLElement, uuid: number): void => {
     selectionBox.innerText = element.getAttribute("data-text");
-    sessionStorage.setItem(`${SessionStorageValuePrefix}-${uuid}`, element.getAttribute("data-value"));
+    SetValue(`${SessionStorageValuePrefix}-${uuid}`, element.getAttribute("data-value"));
 }

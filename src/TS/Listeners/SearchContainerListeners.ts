@@ -1,11 +1,12 @@
 // Constants
 import { SearchTextBoxPrefix, SessionStorageOptionsPrefix } from "Shared/Constants";
 
-// Services
-import { GenerateOptionsMarkup } from "Services/MarkupService";
-
 // Models
 import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
+
+// Services
+import { GenerateOptionsMarkup } from "Services/MarkupService";
+import { GetJSONObject } from "Services/SessionManagementService";
 
 export const InitialiseSearchListeners = (element: Element, uuid: number): void => {
     const optionsStorageKey = `${SessionStorageOptionsPrefix}-${uuid}`,
@@ -13,16 +14,15 @@ export const InitialiseSearchListeners = (element: Element, uuid: number): void 
         searchElement = document.getElementById(`${SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement;
 
     searchElement.addEventListener("input", () => {
-        const sessionStorageOptions = sessionStorage.getItem(optionsStorageKey);
+        console.log(123);
+        const options = GetJSONObject(optionsStorageKey) as Array<SearchBoxGroups | SearchBoxOptions>;
 
-        if (sessionStorageOptions) {
-            const options = JSON.parse(sessionStorageOptions) as Array<SearchBoxGroups | SearchBoxOptions>;
-
+        if (options) {
             const mappedItems = options
                 .map((item: SearchBoxGroups | SearchBoxOptions) => {
-                    const asSearchBoxGroups = (item as SearchBoxGroups).options;
+                    const asGroup = (item as SearchBoxGroups).options;
 
-                    const filteredOptions = asSearchBoxGroups.filter((option: SearchBoxOptions) => {
+                    const filteredOptions = asGroup.filter((option: SearchBoxOptions) => {
                         return option.text.includes(searchElement.value);
                     });
 
@@ -43,4 +43,5 @@ export const InitialiseSearchListeners = (element: Element, uuid: number): void 
 }
 
 export const DestroySearchListeners = (element: Element): void => {
+    element.replaceWith(element.cloneNode(true));
 }

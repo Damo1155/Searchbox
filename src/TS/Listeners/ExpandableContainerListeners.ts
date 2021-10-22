@@ -44,9 +44,7 @@ export const InitialiseExpanderListeners = (element: Element, uuid: number): voi
 }
 
 export const DestroyExpanderListeners = (element: Element): void => {
-    StandardEventListeners.forEach((eventType: EventListenerTypes) => {
-        //element.removeEventListener(eventType);
-    });
+    element.replaceWith(element.cloneNode(true));
 }
 
 export const CollapseContainer = (element: Element, uuid: number): void => {
