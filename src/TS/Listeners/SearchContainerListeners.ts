@@ -26,7 +26,7 @@ export const InitialiseSearchListeners = (element: Element, uuid: number): void 
                         return option.text.includes(searchElement.value);
                     });
 
-                    if (!filteredOptions || filteredOptions.length == 0) {
+                    if ((!item.text.includes(searchElement.value)) && (!filteredOptions || filteredOptions.length == 0)) {
                         return null;
                     }
 
