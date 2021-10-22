@@ -1,5 +1,5 @@
 // Constants
-import { ListboxSelectionClassPrefix, HiddenTextBoxPrefix, ResultsContainerPrefix, SelectionBoxPrefix } from "Shared/Constants";
+import { ListboxSelectionClassPrefix, ResultsContainerPrefix, SelectionBoxPrefix, SearchTextBoxPrefix } from "Shared/Constants";
 
 // Models
 import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
@@ -9,7 +9,6 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
 
     return `
         <div data-selectbox-id="${uuid}">
-            <input id="${HiddenTextBoxPrefix}-${uuid}" type="hidden" disabled="true" aria-hidden="true" />
             <div id="${ListboxSelectionClassPrefix}-${uuid}" class="sb-selection">
                 <div role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="" aria-controls="">
                     <span class="selection" id="${SelectionBoxPrefix}-${uuid}" role="textbox" aria-readonly="true">${placeholderText}</span>
@@ -20,7 +19,8 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
             </div>
             <div class="container" aria-hidden="true">
                 <div class="search">
-                    <input type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
+                    <input id="${SearchTextBoxPrefix}-${uuid}"
+                           type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
                 </div>
                 <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
                     

@@ -5,13 +5,12 @@ import { EventListenerTypes } from "Enums/EventListenerTypes";
 import { CollapseContainer } from "Listeners/ExpandableContainerListeners";
 
 // Constants
-import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, HiddenTextBoxPrefix, SelectionBoxPrefix, StandardEventListeners } from "Shared/Constants";
+import { SpaceKeyCode, EnterKeyCode, ResultsContainerPrefix, SelectionBoxPrefix, StandardEventListeners, SessionStorageValuePrefix } from "Shared/Constants";
 
 export const InitialiseSelectableOptionsListeners = (parentElement: Element, uuid: number): void => {
     const resultsElement = document.getElementById(`${ResultsContainerPrefix}-${uuid}`);
     const optionsElements = resultsElement.querySelectorAll("ul.options li");
-    const hiddenInput = document.getElementById(`${HiddenTextBoxPrefix}-${uuid}`) as HTMLInputElement; // TODO  :   May remove as now working with outermost parent element
-    const selectionBox = document.getElementById(`${SelectionBoxPrefix}-${uuid}`); // TODO  :   May remove as now working with outermost parent element
+    const selectionBox = document.getElementById(`${SelectionBoxPrefix}-${uuid}`);
 
     optionsElements.forEach((element: Element) => {
         StandardEventListeners.forEach((eventType: EventListenerTypes) => {
@@ -19,14 +18,14 @@ export const InitialiseSelectableOptionsListeners = (parentElement: Element, uui
                 const listenerConfiguration = {
                     "click": (): void => {
                         CollapseContainer(parentElement, uuid);
-                        SetValueSelected(element, hiddenInput, selectionBox);
+                        SetValueSelected(element, selectionBox, uuid);
                     },
                     "keydown": () => {
                         const keyboardEvent = event as KeyboardEvent;
 
                         if (keyboardEvent.code == SpaceKeyCode || keyboardEvent.code == EnterKeyCode) {
                             CollapseContainer(parentElement, uuid);
-                            SetValueSelected(element, hiddenInput, selectionBox);
+                            SetValueSelected(element, selectionBox, uuid);
                         }
                     },
                     "focusout": (): void => {
@@ -59,7 +58,7 @@ export const DestroySelectableOptionsListeners = (element: Element): void => {
     });
 }
 
-const SetValueSelected = (element: Element, input: HTMLInputElement, selectionBox: HTMLElement): void => {
-    input.value = element.getAttribute("data-value");
+const SetValueSelected = (element: Element, selectionBox: HTMLElement, uuid: number): void => {
     selectionBox.innerText = element.getAttribute("data-text");
+    sessionStorage.setItem(`${SessionStorageValuePrefix}-${uuid}`, element.getAttribute("data-value"));
 }
