@@ -2,33 +2,35 @@
 import { EventListenerTypes } from "Enums/EventListenerTypes";
 
 // Constants
-import { ListboxSelectionClassPrefix, SpaceKeyCode, EnterKeyCode, StandardEventListeners } from "Shared/Constants";
+import { ListboxSelectionClassPrefix, SpaceKeyCode, EnterKeyCode, StandardEventListeners, SessionStorageOptionsPrefix } from "Shared/Constants";
 
-export const InitialiseExpanderListeners = (element: Element, uuid: number): void => {
-    const listboxElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
+// Models
+import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
 
+// Listeners
+import { DestroySearchListeners, InitialiseSearchListeners } from "Listeners/SearchContainerListeners";
+import { DestroySelectableOptionsListeners, InitialiseSelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
+
+// Services
+import { GenerateOptionsMarkup } from "Services/MarkupService";
+import { GetJSONObject } from "Services/SessionManagementService";
+
+export const InitialiseExpanderListeners = (rootElement: Element, uuid: number): void => {
     StandardEventListeners.forEach((eventType: EventListenerTypes) => {
-        listboxElement.addEventListener(eventType, (event: MouseEvent | KeyboardEvent | FocusEvent) => {
+        rootElement.addEventListener(eventType, (event: MouseEvent | KeyboardEvent | FocusEvent) => {
             const listenerConfiguration = {
                 "click": (): void => {
-                    ExpandableEvent(element, listboxElement);
+                    EventHandler(rootElement, event, uuid);
                 },
                 "keydown": (): void => {
                     const keyboardEvent = event as KeyboardEvent;
 
                     if (keyboardEvent.code == SpaceKeyCode || keyboardEvent.code == EnterKeyCode) {
-                        ExpandableEvent(element, listboxElement);
+                        EventHandler(rootElement, event, uuid);
                     }
                 },
                 "focusout": (): void => {
-                    const focusEvent = event as FocusEvent,
-                        hasRelatedElement = element.contains(<any>focusEvent.relatedTarget);
-
-                    // Purpose  :   If the click event is not related to the focused search box then close 
-                    //              the Searchbox.
-                    if (!hasRelatedElement) {
-                        ExpandableEvent(element, listboxElement);
-                    }
+                    EventHandler(rootElement, event, uuid);
                 }
             };
 
@@ -44,6 +46,10 @@ export const InitialiseExpanderListeners = (element: Element, uuid: number): voi
 }
 
 export const DestroyExpanderListeners = (element: Element): void => {
+    if (!element) {
+        return;
+    }
+
     element.replaceWith(element.cloneNode(true));
 }
 
@@ -54,9 +60,49 @@ export const CollapseContainer = (element: Element, uuid: number): void => {
     listboxElement.querySelector("div").setAttribute("aria-expanded", `${false}`);
 }
 
-const ExpandableEvent = (element: Element, listboxElement: HTMLElement): void => {
-    const isExpanded = element.matches(".expanded");
+const EventHandler = (rootElement: Element, event: Event, uuid: number): void => {
+    const hasRelatedElement = rootElement.contains((<any>event).relatedTarget),
+        selectionContainer = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`).querySelector("div.sb-selection div");
 
-    isExpanded ? element.classList.remove("expanded") : element.classList.add("expanded");
-    listboxElement.querySelector("div").setAttribute("aria-expanded", `${!isExpanded}`);
+    const expanderCallback = {
+        Expand: (): void => {
+            rootElement.classList.add("expanded");
+            selectionContainer.setAttribute("aria-expanded", "true");
+
+            const options = GetJSONObject(`${SessionStorageOptionsPrefix}-${uuid}`) as Array<SearchBoxGroups | SearchBoxOptions>;
+
+            if (options && options.length > 0) {
+                const newElement = document.createElement("div");
+
+                newElement.innerHTML = GenerateOptionsMarkup(options, uuid);                
+                rootElement.appendChild(newElement.firstElementChild);
+            } else {
+                // OPEN CONTAINER WITH 'NO OPTIONS FOUND' MESSAGE
+            }
+        },
+        Collapse: (): void => {
+            rootElement.classList.remove("expanded");
+            selectionContainer.setAttribute("aria-expanded", "false");
+
+            const resultsContainerElement = rootElement.querySelector(".results-container");
+
+            // TODO :   Encompassing item to destroy the event listeners
+            DestroySearchListeners(resultsContainerElement);
+            DestroySelectableOptionsListeners(resultsContainerElement);
+
+            if (resultsContainerElement) {
+                resultsContainerElement.remove();
+            }
+        },
+        SelectNode: (): void => {
+
+        }
+    };
+
+    // TODO :   If child item selected is LI.OPTION then select it
+    //          If child item selected is the search container then do nothing
+    //          If child item selected is DIV.SB-SELECTION then close the container          
+    //          If child item selected is STRONG.GROUP-NAME then do nothing
+    //          If selected item does not belong to the container then hide the search box
+    //rootElement.classList.contains("expanded") ? expanderCallback.Collapse() : expanderCallback.Expand();
 }

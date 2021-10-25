@@ -21,7 +21,7 @@
         .searchbox .sb-selection div .caret span {
           border-left: 0.313rem solid rgba(0, 0, 0, 0);
           border-right: 0.313rem solid rgba(0, 0, 0, 0); }
-  .searchbox .container {
+  .searchbox .results-container {
     width: 100%;
     max-height: 50vh;
     overflow: auto;
@@ -30,9 +30,9 @@
     border: 1px solid #CED4DA;
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem; }
-    .searchbox .container .search {
+    .searchbox .results-container .search {
       padding: 0.675rem; }
-      .searchbox .container .search input {
+      .searchbox .results-container .search input {
         color: #333;
         background-color: #FFF;
         border: 1px solid #CED4DA;
@@ -42,30 +42,30 @@
         display: block;
         box-sizing: border-box;
         width: 100%; }
-    .searchbox .container .results ul.result-groups {
+    .searchbox .results-container .results ul.result-groups {
       margin: 0;
       padding: 0;
       list-style: none; }
-      .searchbox .container .results ul.result-groups li.group {
+      .searchbox .results-container .results ul.result-groups li.group {
         margin: 0 0; }
-        .searchbox .container .results ul.result-groups li.group .group-name {
+        .searchbox .results-container .results ul.result-groups li.group .group-name {
           margin: 0 0.675rem; }
-    .searchbox .container .results ul.options {
+    .searchbox .results-container .results ul.options {
       margin: 0;
       padding: 0;
       list-style: none; }
-      .searchbox .container .results ul.options li.option {
+      .searchbox .results-container .results ul.options li.option {
         cursor: pointer;
         padding: 0.625rem 0.625rem 0.625rem 1.25rem; }
-        .searchbox .container .results ul.options li.option:hover, .searchbox .container .results ul.options li.option:active, .searchbox .container .results ul.options li.option.selected {
+        .searchbox .results-container .results ul.options li.option:hover, .searchbox .results-container .results ul.options li.option:active, .searchbox .results-container .results ul.options li.option.selected {
           font-weight: 500; }
-        .searchbox .container .results ul.options li.option:hover, .searchbox .container .results ul.options li.option:focus {
+        .searchbox .results-container .results ul.options li.option:hover, .searchbox .results-container .results ul.options li.option:focus {
           color: #262626;
           background-color: #86b7fe; }
-        .searchbox .container .results ul.options li.option.selected {
+        .searchbox .results-container .results ul.options li.option.selected {
           color: #262626;
           background-color: #86b7fe; }
-        .searchbox .container .results ul.options li.option:last-child:hover {
+        .searchbox .results-container .results ul.options li.option:last-child:hover {
           border-bottom-left-radius: 0.25rem;
           border-bottom-right-radius: 0.25rem; }
   .searchbox.expanded {
@@ -75,9 +75,9 @@
       border-bottom-right-radius: 0; }
       .searchbox.expanded .sb-selection div .caret span {
         border-bottom: 0.313rem solid #CED4DA; }
-    .searchbox.expanded .container {
+    .searchbox.expanded .results-container {
       display: block; }
   .searchbox:not(.expanded) .sb-selection div .caret span {
     border-top: 0.313rem solid #CED4DA; }
-  .searchbox:not(.expanded) .container {
+  .searchbox:not(.expanded) .results-container {
     display: none; }

@@ -32,14 +32,14 @@ export const InitialiseSelectableOptionsListeners = (parentElement: Element, uui
                         }
                     },
                     "focusout": (): void => {
-                        const focusEvent = event as FocusEvent,
-                            hasRelatedElement = parentElement.contains(<any>focusEvent.relatedTarget);
+                        //const focusEvent = event as FocusEvent,
+                        //    hasRelatedElement = parentElement.contains(<any>focusEvent.relatedTarget);
 
                         // Purpose  :   If the click event is not related to the focused search box then close 
                         //              the Searchbox.
-                        if (!hasRelatedElement) {
-                            CollapseContainer(parentElement, uuid);
-                        }
+                        //if (!hasRelatedElement) {
+                            //CollapseContainer(parentElement, uuid);
+                        //}
                     }
                 }
 
@@ -56,6 +56,10 @@ export const InitialiseSelectableOptionsListeners = (parentElement: Element, uui
 }
 
 export const DestroySelectableOptionsListeners = (element: Element): void => {
+    if (!element) {
+        return;
+    }
+
     element.replaceWith(element.cloneNode(true));
 }
 

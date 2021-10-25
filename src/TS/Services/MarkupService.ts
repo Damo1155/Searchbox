@@ -8,29 +8,18 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
     const placeholderText = element.getAttribute("data-placeholder") || "Select an option";
 
     return `
-        <div data-selectbox-id="${uuid}">
-            <div id="${ListboxSelectionClassPrefix}-${uuid}" class="sb-selection">
-                <div role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="" aria-controls="">
-                    <span class="selection" id="${SelectionBoxPrefix}-${uuid}" role="textbox" aria-readonly="true">${placeholderText}</span>
-                    <span class="caret">
-                        <span></span>
-                    </span>
-                </div>
-            </div>
-            <div class="container" aria-hidden="true">
-                <div class="search">
-                    <input id="${SearchTextBoxPrefix}-${uuid}"
-                           type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
-                </div>
-                <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
-                    
-                </div>
+        <div id="${ListboxSelectionClassPrefix}-${uuid}" class="sb-selection" data-selectbox-id="${uuid}">
+            <div role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="" aria-controls="">
+                <span class="selection" id="${SelectionBoxPrefix}-${uuid}" role="textbox" aria-readonly="true">${placeholderText}</span>
+                <span class="caret">
+                    <span></span>
+                </span>
             </div>
         </div>
     `;
 }
 
-export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>): string => {
+export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>, uuid: number): string => {
     // TODO :   If a flat list of options then change up 'result-groups' architecture as it's currently dependent on child items being provided.
     // TODO :   If no options available on search then display an appropriate message
 
@@ -61,8 +50,16 @@ export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBox
     });
 
     return `
-        <ul class="result-groups" role="listbox">
-            ${markup.toString()}
-        </ul>
+        <div class="results-container" aria-hidden="false">
+            <div class="search">
+                <input id="${SearchTextBoxPrefix}-${uuid}"
+                        type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
+            </div>
+            <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
+                <ul class="result-groups" role="listbox">
+                    ${markup.toString()}
+                </ul>
+            </div>
+        </div>
     `;
 }

@@ -10,11 +10,10 @@ import { GetJSONObject } from "Services/SessionManagementService";
 
 export const InitialiseSearchListeners = (element: Element, uuid: number): void => {
     const optionsStorageKey = `${SessionStorageOptionsPrefix}-${uuid}`,
-        resultsContainer = element.querySelector("div.container div.results"),
+        resultsContainer = element.querySelector("div.results-container div.results"),
         searchElement = document.getElementById(`${SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement;
 
     searchElement.addEventListener("input", () => {
-        console.log(123);
         const options = GetJSONObject(optionsStorageKey) as Array<SearchBoxGroups | SearchBoxOptions>;
 
         if (options) {
@@ -37,11 +36,15 @@ export const InitialiseSearchListeners = (element: Element, uuid: number): void 
                 })
                 .filter((item) => item != null && item != undefined);
 
-            resultsContainer.innerHTML = GenerateOptionsMarkup(mappedItems);
+            resultsContainer.innerHTML = GenerateOptionsMarkup(mappedItems, uuid);
         }
     });
 }
 
 export const DestroySearchListeners = (element: Element): void => {
+    if (!element) {
+        return;
+    }
+
     element.replaceWith(element.cloneNode(true));
 }
