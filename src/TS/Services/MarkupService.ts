@@ -19,10 +19,21 @@ export const ConfigureMarkup = (element: Element, uuid: number): string => {
     `;
 }
 
-export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>, uuid: number): string => {
-    // TODO :   If a flat list of options then change up 'result-groups' architecture as it's currently dependent on child items being provided.
-    // TODO :   If no options available on search then display an appropriate message
+export const GenerateResultContainerMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>, uuid: number): string => {
+    return `
+        <div class="results-container" aria-hidden="false">
+            <div class="search">
+                <input id="${SearchTextBoxPrefix}-${uuid}"
+                        type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
+            </div>
+            <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
+                ${GenerateOptionsMarkup(options)}
+            </div>
+        </div>
+    `;
+}
 
+export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBoxOptions>): string => {
     let markup = "";
     options.forEach((item: SearchBoxGroups | SearchBoxOptions) => {
         let listOptions = "";
@@ -50,16 +61,8 @@ export const GenerateOptionsMarkup = (options: Array<SearchBoxGroups | SearchBox
     });
 
     return `
-        <div class="results-container" aria-hidden="false">
-            <div class="search">
-                <input id="${SearchTextBoxPrefix}-${uuid}"
-                        type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
-            </div>
-            <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
-                <ul class="result-groups" role="listbox">
-                    ${markup.toString()}
-                </ul>
-            </div>
-        </div>
+        <ul class="result-groups" role="listbox">
+            ${markup.toString()}
+        </ul>
     `;
 }

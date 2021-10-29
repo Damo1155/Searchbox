@@ -1,5 +1,6 @@
 export enum EventListenerTypes {
+	Input = "input",
 	Click = "click",
-	Keydown = "keydown",
+	Keyup = "keyup",
 	FocusOut = "focusout"
 }

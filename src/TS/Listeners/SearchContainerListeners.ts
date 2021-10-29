@@ -1,22 +1,25 @@
+// Enums
+import { EventListenerTypes } from "Enums/EventListenerTypes";
+
 // Constants
-import { SearchTextBoxPrefix, SessionStorageOptionsPrefix } from "Shared/Constants";
+import { SearchTextBoxPrefix } from "Shared/Constants";
 
 // Models
 import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
 
 // Services
 import { GenerateOptionsMarkup } from "Services/MarkupService";
-import { GetJSONObject } from "Services/SessionManagementService";
 
-export const InitialiseSearchListeners = (element: Element, uuid: number): void => {
-    const optionsStorageKey = `${SessionStorageOptionsPrefix}-${uuid}`,
-        resultsContainer = element.querySelector("div.results-container div.results"),
-        searchElement = document.getElementById(`${SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement;
+// Listeners
+import { InitialiseOptionListeners } from "Listeners/SelectableOptionsListeners";
 
-    searchElement.addEventListener("input", () => {
-        const options = GetJSONObject(optionsStorageKey) as Array<SearchBoxGroups | SearchBoxOptions>;
+export const InitialiseSearchListeners = (rootElement: Element, options: Array<SearchBoxGroups | SearchBoxOptions>, uuid: number): void => {
+    rootElement
+        .querySelector("div.results-container div.search input")
+        .addEventListener(EventListenerTypes.Input, () => {
+            const searchElement = document.getElementById(`${SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement,
+                resultsContainer = rootElement.querySelector("div.results-container div.results");
 
-        if (options) {
             const mappedItems = options
                 .map((item: SearchBoxGroups | SearchBoxOptions) => {
                     const asGroup = (item as SearchBoxGroups).options;
@@ -36,9 +39,10 @@ export const InitialiseSearchListeners = (element: Element, uuid: number): void 
                 })
                 .filter((item) => item != null && item != undefined);
 
-            resultsContainer.innerHTML = GenerateOptionsMarkup(mappedItems, uuid);
-        }
-    });
+            resultsContainer.innerHTML = GenerateOptionsMarkup(mappedItems);
+
+            InitialiseOptionListeners(rootElement, uuid);
+        });
 }
 
 export const DestroySearchListeners = (element: Element): void => {

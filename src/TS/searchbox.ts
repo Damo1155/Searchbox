@@ -5,14 +5,14 @@ import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
 import { SessionStorageOptionsPrefix, SessionStorageValuePrefix } from "Shared/Constants";
 
 // Services
+import { ConfigureMarkup } from "Services/MarkupService";
 import { GenerateIdentifier } from "Services/UniqueIdentifierService";
 import { RemoveItem, SetJSONObject } from "Services/SessionManagementService";
-import { ConfigureMarkup, GenerateOptionsMarkup } from "Services/MarkupService";
 
 // Listeners
-import { InitialiseSearchListeners, DestroySearchListeners } from "Listeners/SearchContainerListeners";
+import { DestroySearchListeners } from "Listeners/SearchContainerListeners";
 import { InitialiseExpanderListeners, DestroyExpanderListeners } from "Listeners/ExpandableContainerListeners";
-import { InitialiseSelectableOptionsListeners, DestroySelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
+import { InitialiseOptionListeners, DestroySelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
 
 export const initialise = (): void => {
     const elements = document.getElementsByClassName("searchbox");
@@ -33,7 +33,7 @@ export const createContainer = (element: HTMLElement, options?: Array<SearchBoxG
     element.innerHTML = ConfigureMarkup(element, uuid);
 
     InitialiseExpanderListeners(element, uuid);
-    InitialiseSelectableOptionsListeners(element, uuid);
+    InitialiseOptionListeners(element, uuid);
 }
 
 export const updateOptions = (element: HTMLElement, options: Array<SearchBoxGroups | SearchBoxOptions>): void => {
