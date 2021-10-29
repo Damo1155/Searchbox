@@ -3,7 +3,7 @@ import { EventListenerTypes } from "Enums/EventListenerTypes";
 import { KeyboardEventTypes } from "Enums/KeyboardEventTypes";
 
 // Constants
-import { ListboxSelectionClassPrefix, SelectionBoxPrefix, SessionStorageOptionsPrefix } from "Shared/Constants";
+import { ListboxSelectionClassPrefix, SessionStorageOptionsPrefix } from "Shared/Constants";
 
 // Models
 import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
@@ -15,6 +15,12 @@ import { InitialiseSearchListeners } from "Listeners/SearchContainerListeners";
 import { InitialiseOptionListeners } from "Listeners/SelectableOptionsListeners";
 
 export const InitialiseExpanderListeners = (rootElement: Element, uuid: number): void => {
+    rootElement.addEventListener(EventListenerTypes.FocusOut, (event: Event) => {
+        if (!rootElement.contains((<any>event).relatedTarget)) {
+            CollapseContainer(rootElement, uuid, true);
+        }
+    });
+
     [EventListenerTypes.Click, EventListenerTypes.Keyup]
         .forEach((eventType: EventListenerTypes) => {
             rootElement.querySelector(".sb-selection")
@@ -47,7 +53,7 @@ export const DestroyExpanderListeners = (element: Element): void => {
     element.replaceWith(element.cloneNode(true));
 }
 
-export const CollapseContainer = (rootElement: Element, uuid: number): void => {
+export const CollapseContainer = (rootElement: Element, uuid: number, ignoreRemove: boolean = false): void => {
     rootElement.classList.remove("expanded");
 
     const listboxElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
@@ -57,7 +63,7 @@ export const CollapseContainer = (rootElement: Element, uuid: number): void => {
 
     // TODO :   Calls to destroy the event listeners
 
-    if (resultsContainer) {
+    if (resultsContainer && !ignoreRemove) {
         resultsContainer.remove();
     }
 }
@@ -81,7 +87,7 @@ const ExpandableEventHandler = (rootElement: Element, event: Event, uuid: number
                 InitialiseOptionListeners(rootElement, uuid);
                 InitialiseSearchListeners(rootElement, options, uuid);
             } else {
-
+                // TODO :   Open up with no options available message
             }
         },
         Collapse: (): void => {

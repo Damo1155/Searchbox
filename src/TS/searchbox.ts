@@ -25,6 +25,8 @@ export const initialise = (): void => {
 
         InitialiseExpanderListeners(element, uuid);
     }
+
+    // TODO :   Before closing the tab, refresh or redirect wipe out the session storeage
 }
 
 export const createContainer = (element: HTMLElement, options?: Array<SearchBoxGroups | SearchBoxOptions>): void => {
