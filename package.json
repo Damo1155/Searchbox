@@ -34,24 +34,14 @@
   },
   "homepage": "https://github.com/Damo1155/Searchbox#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.5",
-    "@babel/preset-env": "^7.14.5",
-    "@babel/preset-typescript": "^7.15.0",
-    "babel-loader": "^8.2.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "del": "^6.0.0",
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^5.0.0",
-    "gulp-sourcemaps": "^3.0.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "html-webpack-plugin": "^5.3.1",
-    "node-sass": "^6.0.0",
-    "typescript": "^4.3.2",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "babel-loader": "^8.2.5",
+    "html-webpack-plugin": "5.5.0",
+    "typescript": "4.8.4",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.11.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/core": "^7.19.6"
+  }
 }
