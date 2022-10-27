@@ -2,5 +2,7 @@
 
 node_modules/
 
+package.lock.json
+
 # Compiled Frontend Ignores
 src/TS/**/*.js
