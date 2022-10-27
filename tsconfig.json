@@ -14,7 +14,7 @@
     "declaration": true,
     "removeComments": true,
     "isolatedModules": true,
-    "emitDeclarationOnly": true,
+    //"emitDeclarationOnly": true,
     "allowUnreachableCode": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
