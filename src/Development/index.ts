@@ -1,9 +1,5 @@
-console.log(123456);
-
-import { destroy, initialise, updateOptions } from "../TS/searchbox";
-
-// // Models
-// import { SearchBoxGroups, SearchBoxOptions } from "../TS/Models/SearchBoxOptions";
+// Types
+import { SearchBoxGroups, SearchBoxOptions } from "../TS/Types/ListBoxItem";
 
 // initialise();
 
@@ -23,25 +19,25 @@ import { destroy, initialise, updateOptions } from "../TS/searchbox";
 //     destroy(document.getElementById("searchbox-container-1"));
 // };
 
-// const GenerateGroupOptions = (): Array<SearchBoxGroups> => {
-//     let groups = [] as Array<SearchBoxGroups>;
+const GenerateGroupOptions = (): Array<SearchBoxGroups> => {
+    let groups = [] as Array<SearchBoxGroups>;
 
-//     for (var i = 1; i < 5; i++) {
-//         let options = [] as Array<SearchBoxOptions>;
-//         for (var x = 0; x < 3; x++) {
-//             const randomNumber = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(4).toString().replace(".", ""));
+    for (var i = 1; i < 5; i++) {
+        let options = [] as Array<SearchBoxOptions>;
+        for (var x = 0; x < 3; x++) {
+            const randomNumber = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(4).toString().replace(".", ""));
 
-//             options.push({
-//                 value: randomNumber,
-//                 text: `Option ${randomNumber}`
-//             } as SearchBoxOptions);
-//         }
+            options.push({
+                value: randomNumber,
+                text: `Option ${randomNumber}`
+            } as SearchBoxOptions);
+        }
 
-//         groups.push({
-//             options: options,
-//             text: `Group Text ${parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(4).toString().replace(".", ""))}`
-//         } as SearchBoxGroups);
-//     }
+        groups.push({
+            options: options,
+            text: `Group Text ${parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(4).toString().replace(".", ""))}`
+        } as SearchBoxGroups);
+    }
 
-//     return groups
-// }
+    return groups
+}

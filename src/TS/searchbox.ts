@@ -1,8 +1,8 @@
-// Models
-import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
-
 // Constants
-import { SessionStorageOptionsPrefix, SessionStorageValuePrefix } from "Shared/Constants";
+import { CONSTANTS } from "Shared/Constants";
+
+// Types
+import { SearchBoxGroups, SearchBoxOptions } from "./Types/ListBoxItem";
 
 // Services
 import { ConfigureMarkup } from "Services/MarkupService";
@@ -44,7 +44,7 @@ export const updateOptions = (element: HTMLElement, options: Array<SearchBoxGrou
     const firstChildElement = element.querySelector("div"),
         searchBoxUuid = parseInt(firstChildElement.getAttribute("data-selectbox-id"));
 
-    SetJSONObject(`${SessionStorageOptionsPrefix}-${searchBoxUuid}`, options);
+    SetJSONObject(`${CONSTANTS.SessionStorageOptionsPrefix}-${searchBoxUuid}`, options);
 }
 
 export const addAdditionalOptions = (element: HTMLElement, options: Array<SearchBoxGroups> | Array<SearchBoxOptions>): void => {
@@ -54,8 +54,8 @@ export const addAdditionalOptions = (element: HTMLElement, options: Array<Search
 export const destroy = (element: HTMLElement): void => {
     const searchBoxUuid = element.querySelector("div").getAttribute("data-selectbox-id");
 
-    RemoveItem(`${SessionStorageValuePrefix}-${searchBoxUuid}`);
-    RemoveItem(`${SessionStorageOptionsPrefix}-${searchBoxUuid}`);
+    RemoveItem(`${CONSTANTS.SessionStorageValuePrefix}-${searchBoxUuid}`);
+    RemoveItem(`${CONSTANTS.SessionStorageOptionsPrefix}-${searchBoxUuid}`);
 
     DestroySearchListeners(element);
     DestroyExpanderListeners(element);
@@ -70,8 +70,8 @@ export const destroyAll = (): void => {
     for (const element of container) {
         const searchBoxUuid = element.querySelector("div").getAttribute("data-searchbox-id");
 
-        RemoveItem(`${SessionStorageValuePrefix}-${searchBoxUuid}`);
-        RemoveItem(`${SessionStorageOptionsPrefix}-${searchBoxUuid}`);
+        RemoveItem(`${CONSTANTS.SessionStorageValuePrefix}-${searchBoxUuid}`);
+        RemoveItem(`${CONSTANTS.SessionStorageOptionsPrefix}-${searchBoxUuid}`);
         
         DestroySearchListeners(element);
         DestroyExpanderListeners(element);

@@ -1,8 +1,5 @@
 // Constants
-import { SelectionBoxPrefix, SessionStorageValuePrefix } from "Shared/Constants";
-
-// Enums
-import { EventListenerTypes } from "Enums/EventListenerTypes";
+import { CONSTANTS } from "Shared/Constants";
 
 // Services
 import { SetValue } from "Services/SessionManagementService";
@@ -11,14 +8,14 @@ import { SetValue } from "Services/SessionManagementService";
 import { CollapseContainer } from "Listeners/ExpandableContainerListeners";
 
 export const InitialiseOptionListeners = (rootElement: Element, uuid: number): void => {
-    const selectionBox = document.getElementById(`${SelectionBoxPrefix}-${uuid}`);
+    const selectionBox = document.getElementById(`${CONSTANTS.SelectionBoxPrefix}-${uuid}`);
 
     rootElement
         .querySelectorAll("div.results-container div.results li.option")
         .forEach((element: Element) => {
-            element.addEventListener(EventListenerTypes.Click, () => {
+            element.addEventListener("click", () => {
                 selectionBox.innerText = element.getAttribute("data-text");
-                SetValue(`${SessionStorageValuePrefix}-${uuid}`, element.getAttribute("data-value"));
+                SetValue(`${CONSTANTS.SessionStorageValuePrefix}-${uuid}`, element.getAttribute("data-value"));
 
                 CollapseContainer(rootElement, uuid);                
             });

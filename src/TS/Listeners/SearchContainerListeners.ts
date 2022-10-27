@@ -1,11 +1,8 @@
-// Enums
-import { EventListenerTypes } from "Enums/EventListenerTypes";
-
 // Constants
-import { SearchTextBoxPrefix } from "Shared/Constants";
+import { CONSTANTS } from "Shared/Constants";
 
-// Models
-import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
+// Types
+import { SearchBoxGroups, SearchBoxOptions } from "src/TS/Types/ListBoxItem";
 
 // Services
 import { GenerateOptionsMarkup } from "Services/MarkupService";
@@ -16,8 +13,8 @@ import { InitialiseOptionListeners } from "Listeners/SelectableOptionsListeners"
 export const InitialiseSearchListeners = (rootElement: Element, options: Array<SearchBoxGroups | SearchBoxOptions>, uuid: number): void => {
     rootElement
         .querySelector("div.results-container div.search input")
-        .addEventListener(EventListenerTypes.Input, () => {
-            const searchElement = document.getElementById(`${SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement,
+        .addEventListener("input", () => {
+            const searchElement = document.getElementById(`${CONSTANTS.SearchTextBoxPrefix}-${uuid}`) as HTMLInputElement,
                 resultsContainer = rootElement.querySelector("div.results-container div.results");
 
             const mappedItems = options

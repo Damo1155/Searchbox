@@ -1,16 +1,16 @@
 // Constants
-import { ListboxSelectionClassPrefix, ResultsContainerPrefix, SelectionBoxPrefix, SearchTextBoxPrefix } from "Shared/Constants";
+import { CONSTANTS } from "Shared/Constants";
 
-// Models
-import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
+// Types
+import { SearchBoxOptions, SearchBoxGroups } from "src/TS/Types/ListBoxItem";
 
 export const ConfigureMarkup = (element: Element, uuid: number): string => {
     const placeholderText = element.getAttribute("data-placeholder") || "Select an option";
 
     return `
-        <div id="${ListboxSelectionClassPrefix}-${uuid}" class="sb-selection" data-selectbox-id="${uuid}">
+        <div id="${CONSTANTS.ListboxSelectionClassPrefix}-${uuid}" class="sb-selection" data-selectbox-id="${uuid}">
             <div role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="" aria-controls="">
-                <span class="selection" id="${SelectionBoxPrefix}-${uuid}" role="textbox" aria-readonly="true">${placeholderText}</span>
+                <span class="selection" id="${CONSTANTS.SelectionBoxPrefix}-${uuid}" role="textbox" aria-readonly="true">${placeholderText}</span>
                 <span class="caret">
                     <span></span>
                 </span>
@@ -23,10 +23,10 @@ export const GenerateResultContainerMarkup = (options: Array<SearchBoxGroups | S
     return `
         <div class="results-container" aria-hidden="false">
             <div class="search">
-                <input id="${SearchTextBoxPrefix}-${uuid}"
+                <input id="${CONSTANTS.SearchTextBoxPrefix}-${uuid}"
                         type="search" tabindex="0" autocorrect="off" autocapitialize="none" spellcheck="false" aria-autocomplete="list" autocomplete="off" aria-label="" aria-controls="" />
             </div>
-            <div class="results" dir="ltr" id="${ResultsContainerPrefix}-${uuid}">
+            <div class="results" dir="ltr" id="${CONSTANTS.ResultsContainerPrefix}-${uuid}">
                 ${GenerateOptionsMarkup(options)}
             </div>
         </div>

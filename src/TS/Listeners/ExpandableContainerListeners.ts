@@ -1,12 +1,9 @@
-// Enums
-import { EventListenerTypes } from "Enums/EventListenerTypes";
-import { KeyboardEventTypes } from "Enums/KeyboardEventTypes";
-
 // Constants
-import { ListboxSelectionClassPrefix, SessionStorageOptionsPrefix } from "Shared/Constants";
+import { CONSTANTS } from "Shared/Constants";
 
-// Models
-import { SearchBoxOptions, SearchBoxGroups } from "Models/SearchBoxOptions";
+// Types
+import { ListenerEventType, KeyboardEventType } from "src/TS/Types/Events";
+import { SearchBoxGroups, SearchBoxOptions } from "src/TS/Types/ListBoxItem";
 
 // Services
 import { GetJSONObject } from "Services/SessionManagementService";
@@ -15,14 +12,14 @@ import { InitialiseSearchListeners } from "Listeners/SearchContainerListeners";
 import { InitialiseOptionListeners } from "Listeners/SelectableOptionsListeners";
 
 export const InitialiseExpanderListeners = (rootElement: Element, uuid: number): void => {
-    rootElement.addEventListener(EventListenerTypes.FocusOut, (event: Event) => {
+    rootElement.addEventListener("focusout", (event: Event) => {
         if (!rootElement.contains((<any>event).relatedTarget)) {
             CollapseContainer(rootElement, uuid, true);
         }
     });
 
-    [EventListenerTypes.Click, EventListenerTypes.Keyup]
-        .forEach((eventType: EventListenerTypes) => {
+    ["click", "keyup"]
+        .forEach((eventType: ListenerEventType) => {
             rootElement.querySelector(".sb-selection")
                 .addEventListener(eventType, (event: MouseEvent | KeyboardEvent | FocusEvent) => {
                     const listenerConfiguration = {
@@ -31,8 +28,9 @@ export const InitialiseExpanderListeners = (rootElement: Element, uuid: number):
                         },
                         "keyup": (): void => {
                             const keyboardEvent = event as KeyboardEvent;
+                            const keyCode = keyboardEvent.code as KeyboardEventType;
 
-                            if (keyboardEvent.code == KeyboardEventTypes.SpaceKeyCode || keyboardEvent.code == KeyboardEventTypes.EnterKeyCode) {
+                            if (keyCode === "Space" || keyCode === "Enter") {
                                 ExpandableEventHandler(rootElement, event, uuid);
                             }
                         }
@@ -56,7 +54,7 @@ export const DestroyExpanderListeners = (element: Element): void => {
 export const CollapseContainer = (rootElement: Element, uuid: number, ignoreRemove: boolean = false): void => {
     rootElement.classList.remove("expanded");
 
-    const listboxElement = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`);
+    const listboxElement = document.getElementById(`${CONSTANTS.ListboxSelectionClassPrefix}-${uuid}`);
     listboxElement.querySelector("div").setAttribute("aria-expanded", `${false}`);
 
     const resultsContainer = rootElement.querySelector(".results-container");
@@ -69,14 +67,14 @@ export const CollapseContainer = (rootElement: Element, uuid: number, ignoreRemo
 }
 
 const ExpandableEventHandler = (rootElement: Element, event: Event, uuid: number): void => {
-    const selectionContainer = document.getElementById(`${ListboxSelectionClassPrefix}-${uuid}`).querySelector("div");
+    const selectionContainer = document.getElementById(`${CONSTANTS.ListboxSelectionClassPrefix}-${uuid}`).querySelector("div");
 
     const expanderCallback = {
         Expand: (): void => {
             rootElement.classList.add("expanded");
             selectionContainer.setAttribute("aria-expanded", "true");
 
-            const options = GetJSONObject(`${SessionStorageOptionsPrefix}-${uuid}`) as Array<SearchBoxGroups | SearchBoxOptions>;
+            const options = GetJSONObject(`${CONSTANTS.SessionStorageOptionsPrefix}-${uuid}`) as Array<SearchBoxGroups | SearchBoxOptions>;
 
             if (options && options.length > 0) {
                 const newElement = document.createElement("div");

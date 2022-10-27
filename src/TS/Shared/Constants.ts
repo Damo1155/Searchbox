@@ -1,8 +1,11 @@
 const SearchboxPrefix = "sb";
 
-export const SearchTextBoxPrefix = `${SearchboxPrefix}-stb`;
-export const SelectionBoxPrefix = `${SearchboxPrefix}-selection`;
-export const SessionStorageValuePrefix = `${SearchboxPrefix}-ssv`;
-export const ResultsContainerPrefix = `${SearchboxPrefix}-results`;
-export const SessionStorageOptionsPrefix = `${SearchboxPrefix}-sso`;
-export const ListboxSelectionClassPrefix = `${SearchboxPrefix}-lbs`;
+export const CONSTANTS = {
+    SearchboxPrefix,
+    SearchTextBoxPrefix: `${SearchboxPrefix}-stb`,
+    SelectionBoxPrefix: `${SearchboxPrefix}-selection`,
+    SessionStorageValuePrefix: `${SearchboxPrefix}-ssv`,
+    ResultsContainerPrefix: `${SearchboxPrefix}-results`,
+    SessionStorageOptionsPrefix: `${SearchboxPrefix}-sso`,
+    ListboxSelectionClassPrefix: `${SearchboxPrefix}-lbs`
+}
