@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = (env) => {
@@ -9,22 +8,17 @@ module.exports = (env) => {
     return {
         devtool: isProduction ? "source-map" : "eval",
         mode: isProduction ? "production" : "development",
-        entry: {
-            // "searchbox": "./src/TS/searchbox.ts",
-            "index": "./src/Development/index.ts"
+        entry: "./src/Development/index.ts",
+        output: {
+            filename: "index.js",
+            path: path.resolve( __dirname, 'dist' )
         },
-        // output: {
-        //     library: "Searchbox",
-        //     libraryTarget: "umd",
-        //     libraryExport: "default",
-        //     filename: "[name].js",
-        //     path: path.resolve(__dirname, "dist/Scripts")
-        // },
         module: {
             rules: [
                 {
-                    test: /\.tsx?$/,
-                    loader: "babel-loader",
+                    test: /\.ts$/,
+                    exclude: /node_module/,
+                    use: "ts-loader"
                 }
             ]
         },
@@ -45,18 +39,5 @@ module.exports = (env) => {
         //         "Listeners": path.resolve(__dirname, "./src/TS/Listeners/")
         //     }
         // },
-        // optimization: {
-        //     minimize: env.isProduction,
-        //     minimizer: [
-        //         new TerserPlugin({
-        //             extractComments: false,
-        //             terserOptions: {
-        //                 output: {
-        //                     comments: false
-        //                 }
-        //             }
-        //         })
-        //     ]
-        // }
     }
 };

@@ -1,4 +1,6 @@
-// import { destroy, initialise, updateOptions } from "../TS/searchbox";
+console.log(123456);
+
+import { destroy, initialise, updateOptions } from "../TS/searchbox";
 
 // // Models
 // import { SearchBoxGroups, SearchBoxOptions } from "../TS/Models/SearchBoxOptions";
