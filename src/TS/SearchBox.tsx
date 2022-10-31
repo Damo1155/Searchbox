@@ -1,4 +1,4 @@
-import React, { useId, useState } from "react";
+import React, { ChangeEventHandler, useId, useState } from "react";
 
 // Types
 import { SearchBoxOptions } from "./Types/ListBoxItem";
@@ -29,15 +29,18 @@ export const SearchBox = ({
 
     const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOptions>>(options);
 
+    const onUpdate = (value: string) => {
+        const filteredOptions = filterSearchOptions(value, options);
+        setModifiedOptions(filteredOptions);
+    };
+
     return (
         <div className="searchbox">
             <Listbox id={componentId} placeholder={placeholder} open={open} onToggle={setOpen} value={value} />
             
             {open && (
                 <div className="results-container">
-                    <div className="search">
-                        <Input onUpdate={(value) => setModifiedOptions(filterSearchOptions(value, options))} />
-                    </div>
+                    <Input onUpdate={onUpdate} />
                     <ListboxOptions value={value} options={modifiedOptions} />
                 </div>
             )}
