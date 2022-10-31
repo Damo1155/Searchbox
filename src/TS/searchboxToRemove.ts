@@ -1,16 +1,5 @@
-// Constants
-import { CONSTANTS } from "Shared/Constants";
-
 // Types
 import { SearchBoxGroups, SearchBoxOptions } from "./Types/ListBoxItem";
-
-// Services
-import { ConfigureMarkup } from "Services/MarkupService";
-
-// Listeners
-import { DestroySearchListeners } from "Listeners/SearchContainerListeners";
-import { InitialiseExpanderListeners, DestroyExpanderListeners } from "Listeners/ExpandableContainerListeners";
-import { InitialiseOptionListeners, DestroySelectableOptionsListeners } from "Listeners/SelectableOptionsListeners";
 
 export const initialise = (): void => {
     // const elements = document.getElementsByClassName("searchbox");
