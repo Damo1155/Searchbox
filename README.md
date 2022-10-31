@@ -28,3 +28,4 @@
 - [Priority 3] Add ESLint using the AirBnB ruleset
 - [Priority 3] Might be worth incorporating the useMemo hook for efficiency reasons
 - [Priority 3] Add translation support via react-i18next
+- [Priority 3] No relative paths
