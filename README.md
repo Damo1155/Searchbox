@@ -14,6 +14,8 @@ The project is designed to be:
 
 # Temporary Installation Details
 
+These are temporary instructions as the bulk of this will not be available in the final version and will just be a set of consumable components.
+
 - Ensure NodeJS is installed
 - Ensure Yarn is installed globally
     - npm install -g yarn
