@@ -1,7 +1,7 @@
 {
   "name": "searchbox",
   "version": "1.0.0",
-  "description": "Searchbox is a TypeScript/JavaScript replacement for select markup, allowing the user to search the content's of the container easily.",
+  "description": "Searchbox is a React replacement for select markup; allowing the user to search a list of options accessibly and in a user friendly manor.",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "tag",
     "select",
     "tagging",
+    "listbox",
     "dropdown",
     "combobox",
     "selectbox",
@@ -34,8 +35,13 @@
   },
   "homepage": "https://github.com/Damo1155/Searchbox#readme",
   "devDependencies": {
+    "@types/node": "18.11.8",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
     "html-webpack-plugin": "5.5.0",
-    "ts-loader": "^9.4.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ts-loader": "9.4.1",
     "typescript": "4.8.4",
     "webpack": "5.74.0",
     "webpack-cli": "4.10.0",

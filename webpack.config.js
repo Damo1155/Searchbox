@@ -8,15 +8,15 @@ module.exports = (env) => {
     return {
         devtool: isProduction ? "source-map" : "eval",
         mode: isProduction ? "production" : "development",
-        entry: "./src/Development/index.ts",
+        entry: "./src/Development/index.tsx",
         output: {
             filename: "index.js",
-            path: path.resolve( __dirname, 'dist' )
+            path: path.resolve( __dirname, "dist" )
         },
         module: {
             rules: [
                 {
-                    test: /\.ts$/,
+                    test: /\.tsx$/,
                     exclude: /node_module/,
                     use: "ts-loader"
                 }
@@ -28,6 +28,9 @@ module.exports = (env) => {
             }),
             new webpack.HotModuleReplacementPlugin()
         ],
+        resolve: {
+            extensions: [ ".tsx", ".ts", ".js" ],
+        }
         // resolve: {
         //     extensions: [".js"],
         //     alias: {

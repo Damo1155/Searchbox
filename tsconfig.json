@@ -7,23 +7,27 @@
     "node_modules"
   ],
   "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": false,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "newLine": "crlf",
-    "declaration": true,
-    "removeComments": true,
-    "isolatedModules": true,
-    //"emitDeclarationOnly": true,
-    "allowUnreachableCode": false,
+    "jsx": "react-jsx",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    // "moduleResolution": "Node",
+    // "newLine": "crlf",
+    // "declaration": true,
+    // "removeComments": true,
+    // "isolatedModules": true,
+    // //"emitDeclarationOnly": true,
+    // "allowUnreachableCode": false,
+    // "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "Enums/*": [ "src/TS/Types/*" ],
-      "Models/*": [ "src/TS/Models/*" ],
+      "Types/*": [ "src/TS/Types/*" ],
       "Shared/*": [ "src/TS/Shared/*" ],
       "Services/*": [ "src/TS/Services/*" ],
-      "Structure/*": [ "src/TS/Structure/*" ],
       "Listeners/*": [ "src/TS/Listeners/*" ]
     }
   }
