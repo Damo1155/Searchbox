@@ -17,7 +17,6 @@
 
 # TODO
 
-- [Priority 1] 'value and 'options' props in SearchBox.tsx should not be nullable
 - [Priority 1] Need to handle click events for selecting an option(s)
 - [Priority 1] Need to handle keyboard events for accessibility reasons
 - [Priority 1] JEST and Playwright testing needs adding into the pipeline along with code coverage checks using NYC
@@ -25,5 +24,6 @@
 - [Priority 2] Disable selected options
 - [Priority 2] Add support for Tailwind, Bootstrap or standard CSS by using a variant
   - Could potentially be done with a JSON config file
+- [Priority 3] Add ESLint using the AirBnB ruleset
 - [Priority 3] Might be worth incorporating the useMemo hook for efficiency reasons
 - [Priority 3] Add translation support via react-i18next

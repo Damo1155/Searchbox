@@ -5,13 +5,13 @@ import ReactDom from "react-dom/client";
 import "../SCSS/core.scss";
 
 // Components
-import { SearchBox } from "../TS/SearchBox";
+import { App } from "./App";
 
 ReactDom
     .createRoot(document.getElementById("root") as HTMLElement)
     .render(
         <React.StrictMode>
-            <SearchBox />
+            <App />
         </React.StrictMode>
     );
 

@@ -43,10 +43,9 @@ export const ListboxOptions = ({
     return (
         <div className="results" dir="ltr">
             <ul className="result-groups" role="listbox">
-                <li className="group" role="group" aria-label="">Option 1</li>
-                <li className="group" role="group" aria-label="">Option 2</li>
-                <li className="group" role="group" aria-label="">Option 3</li>
-                <li className="group" role="group" aria-label="">Option 4</li>
+                {options.map((option) => (
+                    <li key={option.value} className="group" role="group" aria-label="">{option.text}</li>
+                ))}
             </ul>
         </div>
     );
