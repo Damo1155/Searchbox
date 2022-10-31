@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "webpack serve --open",
-    "webpack-development": "webpack --config=webpack.config.js",
-    "webpack-production": "webpack --env production --config=webpack.config.js"
+    "cover:jest": "jest --coverage --passWithNoTests"
   },
   "repository": {
     "type": "git",
@@ -36,11 +35,15 @@
   "homepage": "https://github.com/Damo1155/Searchbox#readme",
   "devDependencies": {
     "@faker-js/faker": "7.6.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@types/node": "18.11.8",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "css-loader": "6.7.1",
     "html-webpack-plugin": "5.5.0",
+    "jest": "^29.2.2",
+    "jest-environment-jsdom": "^29.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "1.55.0",

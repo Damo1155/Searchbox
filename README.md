@@ -1,3 +1,17 @@
+# Project Purpose
+
+This is a replacement for Select containers which allows for searchable content within a listbox structure using React components. 
+
+The project is designed to be:
+
+- Accessible to WCAG AA 2.1 standards
+- Support Tailwind, Bootstrap and vanilla CSS
+- Easy to consume with minimal configuration
+
+# Future Improvements
+
+- Support Vue, Angular and vanilla Javascript environments
+
 # Temporary Installation Details
 
 - Ensure NodeJS is installed
