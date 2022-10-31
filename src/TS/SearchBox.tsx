@@ -25,8 +25,6 @@ export const SearchBox = ({
     const componentId = id ?? useId();
 
     const [open, setOpen] = useState<boolean>(false);
-    const [searchValue, setSearchValue] = useState<string>("");
-
     const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOptions>>(options);
 
     const onUpdate = (value: string) => {
