@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDom from "react-dom/client";
 
+// Styles
+import "../SCSS/core.scss";
+
+// Components
 import { SearchBox } from "../TS/SearchBox";
 
 ReactDom
@@ -10,7 +14,7 @@ ReactDom
             <SearchBox />
         </React.StrictMode>
     );
-    
+
 // Types
 // import { SearchBoxGroups, SearchBoxOptions } from "../TS/Types/ListBoxItem";
 

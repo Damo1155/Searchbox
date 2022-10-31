@@ -6,5 +6,5 @@ export type SearchBoxGroups = {
 
 export type SearchBoxOptions = {
 	text: string;
-	value: string | number;
+	value: string;
 };
