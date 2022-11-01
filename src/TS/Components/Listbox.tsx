@@ -8,7 +8,7 @@ type ListboxProps = {
     disabled?: boolean;
     placeholder: string;
     onToggle: (state: boolean) => void;
-    value: SearchBoxOption | Array<SearchBoxOption>;
+    value?: SearchBoxOption | Array<SearchBoxOption>;
 };
 
 export const Listbox = ({

@@ -53,38 +53,6 @@
                     }
                 }
             }
-
-            ul.options {
-                margin: 0;
-                padding: 0;
-                list-style: none;
-
-                li.option {
-                    cursor: pointer;
-                    padding: 0.625rem 0.625rem 0.625rem 1.25rem;
-
-                    &:hover, &:active, &.selected {
-                        font-weight: 500; // TODO  :   Variable
-                    }
-
-                    &:hover, &:focus {
-                        color: $listitem-hover-text-colour; // TODO  :   Variable
-                        background-color: $listitem-hover-background-colour; // TODO  :   Variable
-                    }
-
-                    &.selected {
-                        color: $listitem-hover-text-colour; // TODO  :   Variable
-                        background-color: $listitem-hover-background-colour; // TODO  :   Variable
-                    }
-
-                    &:last-child {
-                        &:hover {
-                            border-bottom-left-radius: 0.25rem; // TODO  :   Variable
-                            border-bottom-right-radius: 0.25rem; // TODO  :   Variable
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -119,9 +87,5 @@
                 }
             }
         }
-
-        // .results-container {
-        //     display: none;
-        // }
     }
 }

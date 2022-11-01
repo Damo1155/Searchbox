@@ -2,13 +2,14 @@ import React from "react";
 import { faker } from "@faker-js/faker";
 
 // Types
-import { SearchBoxOptions } from "../TS/Types/ListBoxItem";
+import { SearchBoxOption } from "../TS/Types/ListBoxItem";
 
 // Components
 import { SearchBox } from "../TS/SearchBox";
 
 export const App = () => {    
-    const options: Array<SearchBoxOptions> = [];
+
+    const options: Array<SearchBoxOption> = [];
 
     for (let index = 0; index < 10; index++) {
         options.push({
@@ -17,5 +18,5 @@ export const App = () => {
         });
     }
     
-    return <SearchBox value="" options={options} />;
+    return <SearchBox options={options} />;
 };

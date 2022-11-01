@@ -12,7 +12,7 @@ type SearchBoxProps = {
     id?: string;
     placeholder?: string;
     options: Array<SearchBoxOption>;
-    value: SearchBoxOption | Array<SearchBoxOption>;
+    value?: SearchBoxOption | Array<SearchBoxOption>;
 };
 
 export const SearchBox = ({

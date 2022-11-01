@@ -34,10 +34,10 @@ These are temporary instructions as the bulk of this will not be available in th
 # TODO
 
 - [Priority 1] Need to handle click events for selecting an option(s)
+- [Priority 1] Disable selected options
 - [Priority 1] JEST and Playwright testing needs adding into the pipeline along with code coverage checks using NYC
 - [Priority 2] Need to handle keyboard events for accessibility reasons
 - [Priority 2] Add support for multiple & single selection
-- [Priority 2] Disable selected options
 - [Priority 2] Allow for multi-tiered option groups rather than just a flat list
 - [Priority 2] Add support for Tailwind, Bootstrap or standard CSS by using a variant
   - Could potentially be done with a JSON config file
