@@ -15,6 +15,7 @@
 
     .results-container {
         width: 100%;
+        z-index: 1030;
         max-height: 50vh;
         overflow: auto;
         position: absolute;

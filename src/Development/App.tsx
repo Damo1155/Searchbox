@@ -10,8 +10,17 @@ import { SearchBoxOption } from "../TS/Types/ListBoxItem";
 import { SearchBox } from "../TS/SearchBox";
 
 export const App = () => {
-    const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined);    
-    return <SearchBox value={selectedValue} options={listboxOptions} onSelect={setSelectedValue}  />;
+    const [selectedValue, setSelectedValue] = useState<string>("");
+    const [selectedMultipleValue, setSelectedMultipleValue] = useState<Array<string>>([]);
+    return (
+        <>
+            <div>Single Selection:</div>
+            <SearchBox value={selectedValue} options={listboxOptions} onSelect={(value) => setSelectedValue(value as string)} />
+
+            <div>Multiple Selection:</div>
+            <SearchBox variant="multiple" value={selectedMultipleValue} options={listboxOptions} onSelect={(value) => setSelectedMultipleValue(value as Array<string>)} />
+        </>
+    );
 };
 
 const listboxOptions: Array<SearchBoxOption> = [

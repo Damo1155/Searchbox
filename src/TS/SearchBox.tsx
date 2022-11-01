@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 // Types
+import { SelectionVariant } from "./Types/Variants";
 import { SearchBoxOption } from "./Types/ListBoxItem";
 
 // Components
@@ -9,18 +10,18 @@ import { Button } from "./Components/Button";
 import { Listbox } from "./Components/Listbox";
 
 type SearchBoxProps = {
-    id?: string;
-    value?: string;
     placeholder?: string;
+    variant?: SelectionVariant;
+    value?: string | Array<string>;
     options: Array<SearchBoxOption>;
-    onSelect: (id?: string) => void;
+    onSelect: (selection?: string | Array<string>) => void;
 };
 
 export const SearchBox = ({
-    id,
     value,
     options,
     onSelect,
+    variant = "single",
     placeholder = "Please select an option",
 }: SearchBoxProps) => {
     const [open, setOpen] = useState<boolean>(false);
@@ -33,12 +34,12 @@ export const SearchBox = ({
 
     return (
         <div className="searchbox">
-            <Button placeholder={placeholder} open={open} options={options} onToggle={setOpen} value={value} />
+            <Button placeholder={placeholder} open={open} options={options} onToggle={setOpen} value={value} variant={variant} />
             
             {open && (
                 <div className="results-container">
                     <Input onChange={onChange} />
-                    <Listbox value={value} options={modifiedOptions} onSelect={onSelect} />
+                    <Listbox variant={variant} value={value} options={modifiedOptions} onSelect={onSelect} />
                 </div>
             )}
         </div>
