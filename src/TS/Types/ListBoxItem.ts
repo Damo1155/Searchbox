@@ -1,10 +1,10 @@
 export type SearchBoxGroups = {
 	text: string;
 
-	options: Array<SearchBoxOptions>;
+	options: Array<SearchBoxOption>;
 };
 
-export type SearchBoxOptions = {
+export type SearchBoxOption = {
 	text: string;
 	value: string;
 };

@@ -5,33 +5,12 @@
     position: relative;
 
     .sb-selection {
-        cursor: pointer;
+        width: 100%;
         border-radius: 0.25rem; // TODO :   Variable
         background-color: $white; // TODO   :   Variable
         border: 1px solid $border-colour; // TODO   :   Variable
-
-        div {
-            display: flex;
-            padding: .375rem 0rem .375rem .75rem;
-
-            .selection {
-                width: 100%;
-            }
-
-            .caret {
-                height: auto;
-                display: flex;
-                width: 1.875rem;
-                margin-left: auto;
-                align-items: center;
-                justify-content: center;
-
-                span {
-                    border-left: 0.313rem solid rgba(0, 0, 0, 0);
-                    border-right: 0.313rem solid rgba(0, 0, 0, 0);
-                }
-            }
-        }
+        padding: 0.675rem;
+        text-align: left;
     }
 
     .results-container {

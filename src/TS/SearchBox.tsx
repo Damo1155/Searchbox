@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler, useId, useState } from "react";
 
 // Types
-import { SearchBoxOptions } from "./Types/ListBoxItem";
+import { SearchBoxOption } from "./Types/ListBoxItem";
 
 // Components
 import { Input } from "./Components/Input";
@@ -11,21 +11,20 @@ import { ListboxOptions } from "./Components/ListboxOptions";
 type SearchBoxProps = {
     id?: string;
     placeholder?: string;
-
-    value: string | Array<string>;
-    options: Array<SearchBoxOptions>;
+    options: Array<SearchBoxOption>;
+    value: SearchBoxOption | Array<SearchBoxOption>;
 };
 
 export const SearchBox = ({
     id,
-    value = [],
-    options = [],
+    value,
+    options,
     placeholder = "Please select an option",
 }: SearchBoxProps) => {
     const componentId = id ?? useId();
 
     const [open, setOpen] = useState<boolean>(false);
-    const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOptions>>(options);
+    const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOption>>(options);
 
     const onUpdate = (value: string) => {
         const filteredOptions = filterSearchOptions(value, options);
@@ -34,7 +33,7 @@ export const SearchBox = ({
 
     return (
         <div className="searchbox">
-            <Listbox id={componentId} placeholder={placeholder} open={open} onToggle={setOpen} value={value} />
+            <Listbox placeholder={placeholder} open={open} onToggle={setOpen} value={value} />
             
             {open && (
                 <div className="results-container">
@@ -46,7 +45,7 @@ export const SearchBox = ({
     );
 };
 
-export const filterSearchOptions = (value: string, originalOptions: Array<SearchBoxOptions>) => {
+export const filterSearchOptions = (value: string, originalOptions: Array<SearchBoxOption>) => {
     let filteredOptions = originalOptions;
     
     if (value !== null && value !== undefined) {

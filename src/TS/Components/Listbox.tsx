@@ -1,33 +1,31 @@
-import React from "react";
+import React, { HTMLProps } from "react";
 
-// Constants
-import { CONSTANTS } from "../Shared/Constants";
+// Types
+import { SearchBoxOption } from "../Types/ListBoxItem";
 
 type ListboxProps = {
-    id: string,
     open: boolean;
-    placeholder?: string;
-    value?: string | Array<string>;
+    disabled?: boolean;
+    placeholder: string;
     onToggle: (state: boolean) => void;
+    value: SearchBoxOption | Array<SearchBoxOption>;
 };
 
 export const Listbox = ({
-    id,
     open,
     onToggle,
-    placeholder = "Test"
+    disabled,
+    placeholder
 }: ListboxProps) => {
-    const selectedContentId = `${CONSTANTS.SelectionBoxPrefix}-${id}`;
-    const selectionContainerId = `${CONSTANTS.ListboxSelectionClassPrefix}-${id}`;
-
     return (
-        <div id={selectionContainerId} className="sb-selection" data-selectbox-id="${uuid}" onClick={() => onToggle(!open)}>
-            <div role="combobox" aria-haspopup="true" aria-expanded={open} tabIndex={0} aria-disabled="false" aria-labelledby="" aria-controls="">
-                <span className="selection" id={selectedContentId} role="textbox" aria-readonly="true">{placeholder}</span>
-                <span className="caret">
-                    <span></span>
-                </span>
-            </div>
-        </div>
+        <button
+            aria-controls=""
+            disabled={disabled}
+            aria-haspopup={true}
+            className="sb-selection"
+            onClick={() => onToggle(!open)}
+        >
+            {placeholder}
+        </button>
     );
 };

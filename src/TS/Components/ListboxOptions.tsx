@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 
 // Types
-import { SearchBoxOptions } from "../Types/ListBoxItem";
-
-// Constants
-import { CONSTANTS } from "../Shared/Constants";
+import { SearchBoxOption } from "../Types/ListBoxItem";
 
 type ListboxOptionsProps = {
-    value?: string | Array<string>;
-    options: Array<SearchBoxOptions>;
+    options: Array<SearchBoxOption>;
+    value: SearchBoxOption | Array<SearchBoxOption>;
 };
 
 export const ListboxOptions = ({

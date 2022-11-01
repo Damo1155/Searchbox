@@ -5,7 +5,6 @@ type InputProps = {
 } & HTMLProps<HTMLInputElement>;
 
 export const Input = ({
-    value,
     onUpdate,
 }: InputProps) => {
     return (
