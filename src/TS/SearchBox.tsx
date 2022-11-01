@@ -26,7 +26,7 @@ export const SearchBox = ({
     const [open, setOpen] = useState<boolean>(false);
     const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOption>>(options);
 
-    const onUpdate = (value: string) => {
+    const onChange = (value: string) => {
         const filteredOptions = filterSearchOptions(value, options);
         setModifiedOptions(filteredOptions);
     };
@@ -37,7 +37,7 @@ export const SearchBox = ({
             
             {open && (
                 <div className="results-container">
-                    <Input onUpdate={onUpdate} />
+                    <Input onChange={onChange} />
                     <Listbox value={value} options={modifiedOptions} onSelect={onSelect} />
                 </div>
             )}
