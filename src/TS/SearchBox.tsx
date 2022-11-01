@@ -1,28 +1,28 @@
-import React, { ChangeEventHandler, useId, useState } from "react";
+import React, { useState } from "react";
 
 // Types
 import { SearchBoxOption } from "./Types/ListBoxItem";
 
 // Components
 import { Input } from "./Components/Input";
+import { Button } from "./Components/Button";
 import { Listbox } from "./Components/Listbox";
-import { ListboxOptions } from "./Components/ListboxOptions";
 
 type SearchBoxProps = {
     id?: string;
+    value?: string;
     placeholder?: string;
     options: Array<SearchBoxOption>;
-    value?: SearchBoxOption | Array<SearchBoxOption>;
+    onSelect: (id?: string) => void;
 };
 
 export const SearchBox = ({
     id,
     value,
     options,
+    onSelect,
     placeholder = "Please select an option",
 }: SearchBoxProps) => {
-    const componentId = id ?? useId();
-
     const [open, setOpen] = useState<boolean>(false);
     const [modifiedOptions, setModifiedOptions] = useState<Array<SearchBoxOption>>(options);
 
@@ -33,12 +33,12 @@ export const SearchBox = ({
 
     return (
         <div className="searchbox">
-            <Listbox placeholder={placeholder} open={open} onToggle={setOpen} value={value} />
+            <Button placeholder={placeholder} open={open} options={options} onToggle={setOpen} value={value} />
             
             {open && (
                 <div className="results-container">
                     <Input onUpdate={onUpdate} />
-                    <ListboxOptions value={value} options={modifiedOptions} />
+                    <Listbox value={value} options={modifiedOptions} onSelect={onSelect} />
                 </div>
             )}
         </div>
@@ -49,7 +49,7 @@ export const filterSearchOptions = (value: string, originalOptions: Array<Search
     let filteredOptions = originalOptions;
     
     if (value !== null && value !== undefined) {
-        filteredOptions = originalOptions.filter((option) => option.text.toLowerCase().includes(value.toLowerCase()));
+        filteredOptions = originalOptions.filter((option) => option.name.toLowerCase().includes(value.toLowerCase()));
     }
 
     return filteredOptions;

@@ -1,31 +1,40 @@
-import React, { HTMLProps } from "react";
+// Accessibility Example    :   https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
+
+import React from "react";
 
 // Types
 import { SearchBoxOption } from "../Types/ListBoxItem";
 
 type ListboxProps = {
-    open: boolean;
-    disabled?: boolean;
-    placeholder: string;
-    onToggle: (state: boolean) => void;
-    value?: SearchBoxOption | Array<SearchBoxOption>;
+    value?: string | Array<string>;
+    onSelect: (id?: string) => void;
+    options: Array<SearchBoxOption>;
 };
 
 export const Listbox = ({
-    open,
-    onToggle,
-    disabled,
-    placeholder
+    value,
+    options,
+    onSelect,
 }: ListboxProps) => {
+    const validateSelection = (id: string) => {
+        onSelect(value !== id ? id : undefined);
+    };
+
     return (
-        <button
-            aria-controls=""
-            disabled={disabled}
-            aria-haspopup={true}
-            className="sb-selection"
-            onClick={() => onToggle(!open)}
-        >
-            {placeholder}
-        </button>
+        <div className="results" dir="ltr">
+            <ul className="result-groups" role="listbox">
+                {options.map((option) => (
+                    <li
+                        role="option"
+                        key={option.id} 
+                        className="group"
+                        aria-selected={false} 
+                        onClick={() => validateSelection(option.id)}
+                    >
+                        {option.name}
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
-};
+}

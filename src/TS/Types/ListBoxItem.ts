@@ -5,6 +5,6 @@ export type SearchBoxGroups = {
 };
 
 export type SearchBoxOption = {
-	text: string;
-	value: string;
+	id: string;
+	name: string;
 };
