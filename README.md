@@ -33,7 +33,7 @@ These are temporary instructions as the bulk of this will not be available in th
 
 # TODO
 
-- [Priority 1] Disable selected options
+- [Priority 1] Disable specific options
 - [Priority 1] Ability to remove a selected option
 - [Priority 1] JEST and Playwright testing needs adding into the pipeline along with code coverage checks using NYC
 - [Priority 2] Need to handle keyboard events for accessibility reasons
